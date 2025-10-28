@@ -25,5 +25,5 @@ In modern software engineering many organizations require developers to create u
 | **Deployment Layer**               | AWS                                                |
 
 ## Phase Status
-1. Conception Phase – ✅ Done  
-2. Development Phase – 🚧 In Progress
+1. Conception Phase – Done  
+2. Development Phase – In Progress
