@@ -28,7 +28,7 @@ export function ExportButton({
   return (
     <button
       type="button"
-      className="button secondary"
+      className="gen-btn-secondary"
       onClick={handleExport}
       disabled={disabled || !testCases.length}
     >

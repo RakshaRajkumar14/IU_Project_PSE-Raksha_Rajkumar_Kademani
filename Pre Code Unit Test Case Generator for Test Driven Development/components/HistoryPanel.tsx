@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ExportButton } from "@/components/ExportButton";
 import type { SessionRecord } from "@/types";
@@ -82,32 +83,38 @@ export function HistoryPanel({
   };
 
   return (
-    <section className="panel">
-      <div className="panel-inner stack">
-        <div>
-          <h2>{mode === "compact" ? "Recent History" : "History Library"}</h2>
-          <p className="muted">
+    <section className="gen-history-panel">
+      <div className="gen-history-panel-inner">
+        <div className="gen-history-copy">
+          <h2 className="gen-history-title">
+            {mode === "compact" ? "Recent History" : "History Library"}
+          </h2>
+          <p className="gen-history-subtitle">
             Search by function name, filter by category, preview saved sessions,
             reload them into the form, or download Excel again.
           </p>
         </div>
 
-        <div className="split">
-          <div className="field">
-            <label htmlFor="history-query">Search function</label>
+        <div className="gen-history-filters">
+          <div className="gen-field">
+            <label className="gen-label" htmlFor="history-query">
+              Search function
+            </label>
             <input
               id="history-query"
-              className="input"
+              className="gen-input"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="calculateDiscount"
             />
           </div>
-          <div className="field">
-            <label htmlFor="history-category">Category</label>
+          <div className="gen-field">
+            <label className="gen-label" htmlFor="history-category">
+              Category
+            </label>
             <select
               id="history-category"
-              className="select"
+              className="gen-select"
               value={category}
               onChange={(event) => setCategory(event.target.value)}
             >
@@ -118,11 +125,13 @@ export function HistoryPanel({
               <option value="edge">edge</option>
             </select>
           </div>
-          <div className="field">
-            <label htmlFor="history-sort">Sort</label>
+          <div className="gen-field">
+            <label className="gen-label" htmlFor="history-sort">
+              Sort
+            </label>
             <select
               id="history-sort"
-              className="select"
+              className="gen-select"
               value={sort}
               onChange={(event) => setSort(event.target.value)}
             >
@@ -132,39 +141,46 @@ export function HistoryPanel({
           </div>
         </div>
 
-        <div className="actions">
-          <button type="button" className="button" onClick={() => void loadSessions()}>
+        <div className="gen-actions">
+          <button
+            type="button"
+            className="gen-btn-primary"
+            onClick={() => void loadSessions()}
+          >
             Refresh History
           </button>
         </div>
 
-        <div className={`status ${error ? "error" : ""}`}>
+        <div className={`gen-history-status ${error ? "is-error" : ""}`}>
           {error || status}
         </div>
 
         {sessions.length ? (
-          <div className="stack">
+          <div className="gen-history-list">
             {sessions.map((session) => (
-              <article className="session-card" key={session.id}>
-                <header>
+              <article className="gen-session-card" key={session.id}>
+                <header className="gen-session-header">
                   <div>
-                    <h3>{session.functionName}</h3>
-                    <div className="muted">
+                    <h3 className="gen-session-title">{session.functionName}</h3>
+                    <div className="gen-session-meta">
                       {new Date(session.createdAt).toLocaleString()}
                     </div>
                   </div>
-                  <span className="tag">{session.testCases.length} cases</span>
+                  <span className="gen-session-tag">{session.testCases.length} cases</span>
                 </header>
 
-                <div className="muted">
+                <div className="gen-session-preview">
                   Preview: {session.testCases.slice(0, 2).map((item) => item.title).join(" • ")}
                 </div>
 
-                <div className="actions">
+                <div className="gen-actions">
+                  <Link href={`/results/${session.id}`} className="gen-btn-secondary">
+                    View Results
+                  </Link>
                   {onLoadSession ? (
                     <button
                       type="button"
-                      className="button"
+                      className="gen-btn-primary"
                       onClick={() => onLoadSession(session)}
                     >
                       Load Session
@@ -177,7 +193,7 @@ export function HistoryPanel({
                   />
                   <button
                     type="button"
-                    className="button danger"
+                    className="gen-btn-danger"
                     onClick={() => void removeSession(session.id)}
                   >
                     Delete
@@ -187,7 +203,9 @@ export function HistoryPanel({
             ))}
           </div>
         ) : (
-          <div className="empty">Saved sessions will appear here once generations are persisted.</div>
+          <div className="gen-empty">
+            Saved sessions will appear here once generations are persisted.
+          </div>
         )}
       </div>
     </section>

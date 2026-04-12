@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { QACanvas } from "@/components/QACanvas";
 
 export const metadata: Metadata = {
   title: "Pre-Code Unit Test Case Generator",
@@ -14,7 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <QACanvas />
+        {children}
+      </body>
     </html>
   );
 }

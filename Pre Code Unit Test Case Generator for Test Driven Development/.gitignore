@@ -4,3 +4,14 @@ env/
 venv/
 .DS_Store
 *.log
+node_modules/
+.next/
+out/
+dist/
+build/
+.vercel/
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production

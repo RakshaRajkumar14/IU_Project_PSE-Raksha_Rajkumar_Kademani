@@ -32,7 +32,7 @@ Copy `.env.example` values into `.env.local` and fill in:
 
 ## Supabase Schema
 
-Run the SQL in [supabase/schema.sql](/Users/raksharajkumarkademani/PSE/Pre_Code_Unit_Test_Case_Generator/supabase/schema.sql) to create the `sessions` table and indexes.
+Run the SQL in [supabase/schema.sql](supabase/schema.sql) to create the `sessions` table and indexes.
 
 ## Run locally
 
