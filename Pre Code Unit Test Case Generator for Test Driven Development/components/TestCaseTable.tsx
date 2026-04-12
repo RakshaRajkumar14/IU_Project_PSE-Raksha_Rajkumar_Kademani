@@ -50,22 +50,20 @@ export function TestCaseTable({ testCases, onChange }: TestCaseTableProps) {
         <thead>
           <tr>
             <th className="rts-num">#</th>
-            <th style={{ minWidth: 90 }}>Category</th>
-            <th style={{ minWidth: 180 }}>Title</th>
-            <th style={{ minWidth: 150 }}>Input</th>
-            <th style={{ minWidth: 150 }}>Preconditions</th>
-            <th style={{ minWidth: 200 }}>Steps</th>
-            <th style={{ minWidth: 200 }}>Expected Result</th>
-            <th style={{ minWidth: 90 }}>Priority</th>
+            <th className="rts-th" style={{ minWidth: 100 }}>Category</th>
+            <th className="rts-th" style={{ minWidth: 200 }}>Title</th>
+            <th className="rts-th" style={{ minWidth: 180 }}>Input</th>
+            <th className="rts-th" style={{ minWidth: 180 }}>Preconditions</th>
+            <th className="rts-th" style={{ minWidth: 250 }}>Steps</th>
+            <th className="rts-th" style={{ minWidth: 250 }}>Expected Result</th>
+            <th className="rts-th" style={{ minWidth: 110 }}>Priority</th>
           </tr>
         </thead>
         <tbody>
           {testCases.map((tc, index) => (
             <tr key={tc.id}>
               <td className="rts-num">{index + 1}</td>
-
-              {/* Category */}
-              <td>
+              <td className="rts-td">
                 <input
                   className="rts-input"
                   value={tc.category}
@@ -76,9 +74,7 @@ export function TestCaseTable({ testCases, onChange }: TestCaseTableProps) {
                   {tc.category}
                 </span>
               </td>
-
-              {/* Title */}
-              <td>
+              <td className="rts-td">
                 <textarea
                   className="rts-textarea"
                   value={tc.title}
@@ -87,9 +83,7 @@ export function TestCaseTable({ testCases, onChange }: TestCaseTableProps) {
                   rows={3}
                 />
               </td>
-
-              {/* Input */}
-              <td>
+              <td className="rts-td">
                 <textarea
                   className="rts-textarea"
                   value={tc.input}
@@ -98,9 +92,7 @@ export function TestCaseTable({ testCases, onChange }: TestCaseTableProps) {
                   rows={3}
                 />
               </td>
-
-              {/* Preconditions */}
-              <td>
+              <td className="rts-td">
                 <textarea
                   className="rts-textarea"
                   value={tc.preconditions}
@@ -109,9 +101,7 @@ export function TestCaseTable({ testCases, onChange }: TestCaseTableProps) {
                   rows={3}
                 />
               </td>
-
-              {/* Steps */}
-              <td>
+              <td className="rts-td">
                 <textarea
                   className="rts-textarea"
                   value={tc.steps}
@@ -120,9 +110,7 @@ export function TestCaseTable({ testCases, onChange }: TestCaseTableProps) {
                   rows={3}
                 />
               </td>
-
-              {/* Expected Result */}
-              <td>
+              <td className="rts-td">
                 <textarea
                   className="rts-textarea"
                   value={tc.expectedResult}
@@ -131,9 +119,7 @@ export function TestCaseTable({ testCases, onChange }: TestCaseTableProps) {
                   rows={3}
                 />
               </td>
-
-              {/* Priority */}
-              <td>
+              <td className="rts-td">
                 <span className={getPriorityClass(tc.priority)}>
                   {tc.priority}
                 </span>

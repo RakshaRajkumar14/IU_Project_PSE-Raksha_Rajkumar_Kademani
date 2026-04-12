@@ -103,10 +103,10 @@ export async function generateCasesWithGemini(prompt: string): Promise<TestCase[
     throw new Error("Missing GEMINI_API_KEY.");
   }
 
-  const model = process.env.GEMINI_MODEL || "gemini-1.5-flash";
+  const model = process.env.GEMINI_MODEL || "gemini-2.0-flash";
 
   const response = await fetchWithRetry(
-    `https://generativelanguage.googleapis.com/v1/models/${model}:generateContent?key=${apiKey}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
