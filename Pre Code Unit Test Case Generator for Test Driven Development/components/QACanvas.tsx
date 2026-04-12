@@ -14,16 +14,16 @@ export function QACanvas() {
     let animationFrameId: number;
     let width = 0;
     let height = 0;
-    
+
     // Slow, cinematic speeds
     const fadeAlpha = 0.08;
     const speedMult = 0.3;
-    
+
     // Constants
     const PASS_TERMS = ["✓ PASS", "200 OK", "EXPECT(true)", "TEST MATCH"];
     const FAIL_TERMS = ["✗ FAIL", "EXCEPTION", "NULL", "404 NOT FOUND"];
     const TEST_TERMS = ["TC-042", "describe()", "assert()", "mock", "spyOn()", "100% cov"];
-    
+
     const BADGES = [
       { text: "✓ PASS", color: "#10b981" },
       { text: "✗ FAIL", color: "#ef4444" },
@@ -43,7 +43,7 @@ export function QACanvas() {
       term: string;
       color: string;
       alpha: number;
-      
+
       constructor() {
         this.x = Math.random() * width;
         this.y = height + Math.random() * 500;
@@ -52,7 +52,7 @@ export function QACanvas() {
         this.color = this.getColorForTerm(this.term);
         this.alpha = Math.random() * 0.4 + 0.1;
       }
-      
+
       getRandomTerm() {
         const rand = Math.random();
         if (rand < 0.25) return PASS_TERMS[Math.floor(Math.random() * PASS_TERMS.length)];
@@ -69,7 +69,7 @@ export function QACanvas() {
       update() {
         // Float upwards instead of falling matrix style for a more soothing feel
         this.y -= this.speed;
-        
+
         // Reset at bottom when floating off top
         if (this.y < -50) {
           this.y = height + 50;
@@ -106,7 +106,7 @@ export function QACanvas() {
         this.y = Math.random() * height;
         this.vx = (Math.random() - 0.5) * 0.4 * speedMult;
         this.vy = (Math.random() - 0.5) * 0.4 * speedMult;
-        
+
         const b = BADGES[Math.floor(Math.random() * BADGES.length)];
         this.text = b.text;
         this.color = b.color;
@@ -118,7 +118,7 @@ export function QACanvas() {
       update() {
         this.x += this.vx;
         this.y += this.vy;
-        
+
         if (this.x < -100) this.x = width + 100;
         if (this.x > width + 100) this.x = -100;
         if (this.y < -100) this.y = height + 100;
@@ -132,20 +132,20 @@ export function QACanvas() {
         if (!ctx) return;
         ctx.save();
         ctx.globalAlpha = Math.max(0, Math.min(1, this.alpha));
-        
+
         // Draw elegant pill
         ctx.beginPath();
         const rad = 12;
         const h = 24;
-        ctx.roundRect(this.x - this.width/2, this.y - h/2, this.width, h, rad);
-        
+        ctx.roundRect(this.x - this.width / 2, this.y - h / 2, this.width, h, rad);
+
         // Subtle glow stroke
         ctx.shadowBlur = 8;
         ctx.shadowColor = this.color;
         ctx.strokeStyle = this.color;
         ctx.lineWidth = 1;
         ctx.stroke();
-        
+
         ctx.shadowBlur = 0;
         ctx.fillStyle = this.color + "1A"; // 10% opacity fill
         ctx.fill();
@@ -155,7 +155,7 @@ export function QACanvas() {
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(this.text, this.x, this.y);
-        
+
         ctx.restore();
       }
     }
@@ -168,7 +168,7 @@ export function QACanvas() {
 
       items = [];
       badges = [];
-      
+
       const itemCount = Math.min(Math.floor(width / 30), 40);
       for (let i = 0; i < itemCount; i++) {
         items.push(new BubblingText());
@@ -200,13 +200,13 @@ export function QACanvas() {
       // Slow Scan line
       scanLineY += 1.5 * speedMult;
       if (scanLineY > height + 200) scanLineY = -200;
-      
+
       const scanGrad = ctx.createLinearGradient(0, scanLineY - 100, 0, scanLineY);
       scanGrad.addColorStop(0, "rgba(124, 92, 255, 0)");
       scanGrad.addColorStop(1, "rgba(124, 92, 255, 0.05)");
       ctx.fillStyle = scanGrad;
       ctx.fillRect(0, scanLineY - 100, width, 100);
-      
+
       ctx.fillStyle = "rgba(124, 92, 255, 0.15)";
       ctx.fillRect(0, scanLineY, width, 1);
 
