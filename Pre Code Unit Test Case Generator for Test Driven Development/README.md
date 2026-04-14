@@ -113,7 +113,7 @@ This diagram represents the key functionalities available to users.
 - 10% fallback usage
 ## Testing
 - Unit Testing (Jest)
-- Integration Testing (API endpoints)
+- Integration Testing (API endpoints).
 - End-to-End Testing
 ## Challenges
 - Prompt engineering complexity
