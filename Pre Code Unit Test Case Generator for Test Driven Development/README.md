@@ -1,5 +1,11 @@
 # Pre-Code Unit Test Case Generator
 
+## Live Demo & Credentials
+- **Live Application**: [https://test-gen-ai-ks9a.onrender.com/](https://test-gen-ai-ks9a.onrender.com/)
+- **Evaluator Access**:
+  - **Email**: `testgenai123@gmail.com`
+  - **Password**: `testgenai123`
+
 In modern software engineering, many organizations require developers to create unit test cases before implementing actual code as part of Test-Driven Development (TDD). This project implements the Phase 2 web application described in the university project guidelines, providing an intelligent system capable of automatically creating pre-code unit test cases from function and behavior descriptions.
 
 ## Technology Stack
@@ -12,6 +18,22 @@ In modern software engineering, many organizations require developers to create 
 | **Authentication**                 | Supabase Auth                                      |
 | **DevOps & CI/CD**                 | Docker, Docker Compose                             |
 | **Deployment**                     | Render (Optimized Standalone Build)               |
+
+## System Design
+
+### System Context Diagram
+![System Context](./images/context.png)
+
+This diagram presents a high-level view of the system, showing how users interact with external services.
+### System Architecture Diagram
+![System Architecture](./images/architecture.png)
+
+The system architecture illustrates the interaction between frontend, backend, AI engine, and database.
+
+### Use Case Diagram
+![Use Case](./images/usecase.png)
+
+This diagram represents the key functionalities available to users.
 
 ## Key Features
 - **Intelligent Generation**: Uses Google Gemini to construct comprehensive testing suites including edge cases and boundary conditions.
@@ -26,20 +48,66 @@ In modern software engineering, many organizations require developers to create 
 - Support multiple development flows by enabling developers to define tests before implementing code.
 - Provide a standardized and time-saving solution that accelerates the development process and enhances software quality overall.
 
-## Environment Setup
-Copy `.env.example` values into `.env.local` and fill in:
-- `GEMINI_API_KEY`
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- `SUPABASE_SERVICE_ROLE_KEY`
+## Functional Requirements
+- **FR-01**: Auto-generate 6+ test cases (Happy Path, Boundary, Negative, Edge).
+- **FR-02**: Real-time Supabase persistence (< 2s).
+- **FR-03**: Advanced history filtering (Function Name, Type).
+- **FR-04**: Formatted Excel (.xlsx) export functionality.
+- **FR-05**: Secure Email/Password Authentication (Supabase).
+- **FR-06**: Route protection and unauthorized redirection.
+- **FR-07**: Dynamic inline editing for all test case entries.
+- **FR-08**: Containerized deployment via Docker Compose.
 
-## Run Locally
+## Non-Functional Requirements
+- **Performance**: End-to-end generation in < 8s (p90).
+- **Availability**: 99.5% uptime on cloud environments.
+- **Security**: Zero client-side secrets; 100% auth coverage.
+- **Maintainability**: Strict TypeScript and full JSDoc documentation.
+- **Portability**: Parity between local Docker and Vercel cloud.
+
+## Risks & Strategies
+- **AI Reliability**: Managed via behavior-specific prompting and inline editing for manual correction.
+- **Data Integrity**: Ensured through Supabase PostgreSQL constraints and real-time validation.
+- **Scalability**: Addressed by optimized standalone builds and cloud-native database scaling.
+
+## Getting Started
+
+### 1. Prerequisites
+- **Node.js**: v18.x or higher
+- **Docker**: Optional, for containerized execution
+
+### 2. Environment Configuration
+Create a `.env.local` file in the root directory and populate it with your credentials:
 ```bash
-npm install
-npm run dev
+GEMINI_API_KEY=your_gemini_key
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 ```
 
-## Docker Deployment
+### 3. Installation
+Install the project dependencies using npm:
+```bash
+npm install
+```
+
+### 4. Running the Application
+#### Development Mode
+Start the local development server:
+```bash
+npm run dev
+```
+The application will be available at `http://localhost:3000`.
+
+#### Production Build
+To create an optimized production build:
+```bash
+npm run build
+npm start
+```
+
+### 5. Docker Deployment (Recommended)
+You can launch the entire stack (app + services) using Docker Compose:
 ```bash
 docker compose up --build
 ```
@@ -47,3 +115,4 @@ docker compose up --build
 ## Project Status
 1. Conception Phase – Done  
 2. Development Phase – Complete (Academic Submission Ready)
+3. Finalization Completed – Phase 3 (Final Delivery)
