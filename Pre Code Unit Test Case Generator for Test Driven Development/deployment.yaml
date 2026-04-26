@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-generator-deployment
+  labels:
+    app: test-generator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-generator
+  template:
+    metadata:
+      labels:
+        app: test-generator
+    spec:
+      containers:
+      - name: test-generator-app
+        # Make sure to build your local image first:
+        # docker build -t test-generator-app:latest .
+        image: test-generator-app:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - secretRef:
+            name: test-generator-secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-generator-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: test-generator
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
